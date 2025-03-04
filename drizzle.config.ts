@@ -1,4 +1,3 @@
-require("dotenv").config();
 
 import type { Config } from "drizzle-kit";
 
