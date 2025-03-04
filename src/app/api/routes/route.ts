@@ -7,6 +7,7 @@ export async function GET() {
     const routes = await db.select().from(transportRoutes);
     console.log("Data dari Database:", routes); // Debugging
     return NextResponse.json({ routes }, { status: 200 });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Gagal mengambil data trayek" }, { status: 500 });
   }
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
     }).returning();
 
     return NextResponse.json({ message: "Trayek berhasil ditambahkan", data: result }, { status: 201 });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Gagal menambahkan trayek" }, { status: 500 });
   }

@@ -3,9 +3,9 @@ import { db } from "@/db";
 import { transportRoutes } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params } : {params:any} ) {
   try {
-    const { routeName, routeLength, status, fleetCount } = await req.json();
+    const { routeName, routeLength, status, fleetCount } = await request.json();
     const id = Number(params.id);
 
     if (!routeName || !routeLength || !status || !fleetCount) {
@@ -17,17 +17,19 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       .where(eq(transportRoutes.id, id));
 
     return NextResponse.json({ message: "Trayek berhasil diperbarui" }, { status: 200 });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Gagal memperbarui trayek" }, { status: 500 });
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }:{params:any}) {
   try {
     const id = Number(params.id);
     await db.delete(transportRoutes).where(eq(transportRoutes.id, id));
 
     return NextResponse.json({ message: "Trayek berhasil dihapus" }, { status: 200 });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Gagal menghapus trayek" }, { status: 500 });
   }
